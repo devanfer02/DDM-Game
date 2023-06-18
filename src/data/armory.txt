@@ -1,0 +1,10 @@
+Sacred Gravestone;weaponAtk +30;70
+Primodial Harp ;weaponAtk +20;60
+Wolf Sacred Claw; weaponAtk +40;80
+Lost Spear of Sky;def +20;40
+Favonious Spectre;def +50;30
+Stormbinger Fang;hp +100;20
+Crimson Talon;weaponAtk +35;70
+Celestial Tailwind;def +40;60
+Harmony Blade;weaponAtk +25;40
+Lunar Breeze Harp; weaponAtk +30;50
