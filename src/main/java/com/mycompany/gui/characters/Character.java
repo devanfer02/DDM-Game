@@ -14,6 +14,7 @@ public abstract class Character
     private String name;
     private Weapon weapon;
     private int baseHp;
+    private int baseDef;
     private int hp;
     private int def;
     private int level;
@@ -26,6 +27,7 @@ public abstract class Character
         setHp(hp);
         setLevel(1); 
         setDef(hp/2);
+        setBaseDef((int)(hp * 0.8));
         readPassive();
     }
 
@@ -45,6 +47,18 @@ public abstract class Character
                 setBaseHp(getBaseHp()+stats);
                 break;
         }
+    }
+
+    public void heal()
+    {
+        int totalHp = this.getHp() + 100;
+        if(totalHp > this.getBaseHp()) totalHp = this.getBaseHp();
+        this.setHp(totalHp);
+    }
+
+    protected void levelUp()
+    {
+        this.level++;
     }
 
     // abstract methods
@@ -92,6 +106,14 @@ public abstract class Character
 
     public final void setDef(int def) {
         this.def = def;
+    }
+
+    public final int getBaseDef() {
+        return baseDef;
+    }
+
+    public final void setBaseDef(int baseDef) {
+        this.baseDef = baseDef;
     }
 
     public final int getLevel() {

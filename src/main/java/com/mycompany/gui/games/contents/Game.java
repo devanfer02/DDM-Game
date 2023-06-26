@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.mycompany.gui.games.Bot;
 import com.mycompany.gui.games.Engine;
 import com.mycompany.gui.games.contents.panels.CPanel;
 import com.mycompany.gui.games.controllers.ChoiceController;
@@ -32,6 +33,10 @@ public class Game extends Content implements Choices
     private Character player;
     private Character npc;
     private Character enemy;
+
+    // bots
+    private Bot npcBot;
+    private Bot enemyBot;
 
     // components
     private CPanel npcPanel;
@@ -60,10 +65,9 @@ public class Game extends Content implements Choices
         playerPanel = new CPanel(player);
         JPanel buttonsPanel    = new JPanel(new GridLayout(1,1));
         JPanel actChoicesPanel = new JPanel(new GridLayout(5, 1, 5, 5));
-        JPanel infoPanel       = new JPanel();
+        JPanel infoPanel       = new JPanel(new GridLayout(3, 1));
 
         actionLabel = new JLabel("ACTIONS");
-        actionLabel.setBorder(new EmptyBorder(0,32,0,0));
 
         actChoiceButtons    = new JButton[4];
         actChoiceButtons[0] = new JButton("ATTACK");
@@ -77,11 +81,14 @@ public class Game extends Content implements Choices
         infoLabels[1] = new JLabel("<HTML></HTML>");
         infoLabels[2] = new JLabel("<HTML></HTML>");
 
+        npcBot = new Bot(npc, infoLabels[1]);
+        enemyBot = new Bot(enemy, infoLabels[2]); 
+
         npcPanel.setBounds(200,80,300,300);
         enemyPanel.setBounds(680, 80, 300, 300);;
         actChoicesPanel.setBounds(20,390,150,250);
         buttonsPanel.setBounds(5,5,56,56);
-        infoPanel.setBounds(185, 440, 550, 400); 
+        infoPanel.setBounds(210, 470, 550, 150); 
         playerPanel.setBounds(740,480,300,200);
 
         SwingUtil.setInvisible(actChoicesPanel);
@@ -113,6 +120,7 @@ public class Game extends Content implements Choices
         // special section
         settingButton.setBorderPainted(false);
         playerPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2)); 
+        actionLabel.setBorder(new EmptyBorder(0,32,0,0));
         playerPanel.setFontSize(24);
 
         cont.add(npcPanel); 
@@ -195,56 +203,6 @@ public class Game extends Content implements Choices
         }
     }
 
-    public void runBot(Character character, JLabel label) 
-    {
-        // BOT AI, currently only support attack
-        if (character.getHp() <= 0)
-        {
-            label.setText("<HTML></HTML>");
-            return;
-        }
-        int attackTo = (int) (Math.random() * 2 + 1);
-        String status = "null"; int damage = 0;
-        if (character == enemy)
-        {
-            status = String.format("%s BITED ", enemy.getName());
-            if (attackTo == 1 && npc.getHp() > 0)
-            {
-                damage = npc.getHp();
-                enemy.attack(npc);
-                damage -= npc.getHp();
-                status += String.format("%s WITH ", npc.getName());
-            }
-            else 
-            {
-                damage = player.getHp();
-                enemy.attack(player);
-                damage -= player.getHp();
-                status += "YOU WITH ";
-            }
-        }
-        else
-        {
-            status = String.format("%s ATTACKED ", npc.getName());
-            if (attackTo == 1 && enemy.getHp() > 0)
-            {
-                damage = npc.getHp();
-                npc.attack(enemy);
-                damage -= npc.getHp();
-                status += String.format("%s WITH ",enemy.getName());
-            }
-            else 
-            {
-                damage = player.getHp();
-                npc.attack(player);
-                damage -= player.getHp();
-                status += "YOU WITH ";
-            }
-        }
-        status += String.format("%d DAMAGE!", damage);
-        label.setText(status);
-    }
-
     public void actionHandling(String action)
     {
         int damage; String attacked; Character temp;
@@ -258,12 +216,11 @@ public class Game extends Content implements Choices
             { damage = npc.getHp(); player.attack(npc); temp = npc; }
             else 
             { damage = enemy.getHp(); player.attack(enemy); temp = enemy; }
-            if (damage <= 10) player.setLevel(player.getLevel() + 1);
             damage -= temp.getHp();
             attacked = temp.getName();
             status1 = String.format("YOU ATTACKED %s WITH %d DAMAGE!", attacked, damage);
             infoLabels[0].setText(status1);
-            runBot(npc, infoLabels[1]); runBot(enemy, infoLabels[2]);
+            npcBot.action(player,enemy); enemyBot.action(player, npc);
             update();
             return;
         }
@@ -282,18 +239,28 @@ public class Game extends Content implements Choices
                     actChoiceButtons[1].setVisible(false);
             }
             case "HEAL" -> {
-                runBot(npc, infoLabels[1]); runBot(enemy, infoLabels[2]);
-                // update();
+                int calc = player.getHp();
+                player.heal();
+                calc = player.getHp() - calc;
+                status1 = String.format("YOU HEALED %d HP", calc); 
+                infoLabels[0].setText(status1);
+                npcBot.action(player,enemy); enemyBot.action(player, npc);
+                update();
             }
             case "DEFENSE" -> {
-                runBot(npc, infoLabels[1]); runBot(enemy, infoLabels[2]);
-                // update();
+                int calc = player.getDef();
+                player.defense();
+                calc = player.getDef() - calc;
+                status1 = String.format("YOU DEFENSE UP %d DEF", calc); 
+                infoLabels[0].setText(status1);
+                npcBot.action(player,enemy); enemyBot.action(player, npc);
+                update();
             }
             case "REPAIR" -> {
                 status1 = "YOU REPAIRED YOUR WEAPON";
                 infoLabels[0].setText(status1);
                 player.getWeapon().repair();
-                runBot(npc, infoLabels[1]); runBot(enemy, infoLabels[2]);
+                npcBot.action(player,enemy); enemyBot.action(player, npc);
                 update();
             }
             case "BACK" -> {
@@ -336,7 +303,7 @@ public class Game extends Content implements Choices
         Engine.setGameRunning(false);
     }
 
-    public boolean isOver()
+    private boolean isOver()
     {
         return (npc.getHp() <= 0 && enemy.getHp() <= 0) || (player.getHp() <= 0); 
     }

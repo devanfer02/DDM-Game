@@ -200,7 +200,7 @@ public class Music
             clip = AudioSystem.getClip();
             clip.open(audioStream); 
         } catch (Exception e) {
-            System.out.printf("Error: %s\n",e.getMessage());
+            console.log("Error : " + e.getMessage()); 
         }
         return clip;
     }

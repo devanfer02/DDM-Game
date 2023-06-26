@@ -22,7 +22,7 @@ public class Enemy extends Character
     {
         int characterHp = character.getHp();
         int damage = this.getLevel() * baseAtk + this.getWeapon().getAtk() - character.getDef() + Weapon.randomAtk(this.getWeapon());
-        if(damage < 0) {damage = 0;}
+        if(damage < 0) { if(damage<10) levelUp(); damage = 0;}
         characterHp -= damage;
         if(characterHp < 0) characterHp = 0;
         character.setHp(characterHp);
@@ -31,14 +31,9 @@ public class Enemy extends Character
     public void defense()
     {
         int addDef = this.getDef() + baseAtk * this.getLevel() / 2; 
+        if (addDef > getBaseDef())
+            addDef = 0;
         this.setDef(this.getDef() + addDef);
-    }
-
-    public void remedy()
-    {
-        int totalHp = this.getHp() + 100;
-        if(totalHp > this.getBaseHp()) totalHp = this.getBaseHp();
-        this.setHp(totalHp);
     }
 
     public static int getBaseAtk()
