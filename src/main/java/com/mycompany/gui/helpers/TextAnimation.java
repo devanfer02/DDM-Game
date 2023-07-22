@@ -24,23 +24,31 @@ public class TextAnimation
 
     public void startAnimate()
     {
-        if(timer != null)
+        if (timer != null)
+        {
             return;
+        }
+        
         index = 0; finish = false;
         label.setText("<HTML></HTML>");
+
         timer = new Timer(delay, (event) -> {
             if(index >= message.length())
             { stopAnimate(); return; }
             String display = message.substring(0, ++index);
             label.setText("<HTML>" + display + "</HTML>");
         });
+
         timer.start();
     }
 
     public void stopAnimate()
     {
         if(timer != null)
-        timer.stop();
+        {
+            timer.stop();
+        }
+        
         timer = null;
         finish = true;
     }

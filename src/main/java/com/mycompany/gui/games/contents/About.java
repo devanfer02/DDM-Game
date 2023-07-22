@@ -3,8 +3,6 @@ package com.mycompany.gui.games.contents;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,24 +32,25 @@ public class About extends Content
         super(size);
         cont = Engine.frame.getContentPane();
 
-        JPanel titlePanel = new JPanel();
-        JPanel mainPanel = new JPanel();
+        JPanel titlePanel  = new JPanel();
+        JPanel mainPanel   = new JPanel();
         JPanel buttonPanel = new JPanel(new GridLayout(1, 1));
         JPanel imagesPanel = new JPanel(new GridLayout(1, 2));
 
-        prodiImage = new ImageIcon("./src/icons/pti_white.png");
+        prodiImage   = new ImageIcon("./src/icons/pti_white.png");
         facultyImage = new ImageIcon("./src/icons/filkom.png");
         facultyImage = SwingUtil.resizeImageIcon(facultyImage, 230, 67);
-        prodiImage = SwingUtil.resizeImageIcon(prodiImage, 197, 234);
+        prodiImage   = SwingUtil.resizeImageIcon(prodiImage, 197, 234);
 
-        prodiLabel = new JLabel(prodiImage);
+        prodiLabel   = new JLabel(prodiImage);
         facultyLabel = new JLabel(facultyImage);
 
-        titleLabel = new JLabel("ABOUT");
+        titleLabel  = new JLabel("ABOUT");
 
-        backButton = new JButton("BACK MENU");
+        backButton  = new JButton("BACK MENU");
 
-        textDesc = new JTextArea(
+        textDesc = new JTextArea
+        (
         """
             This gui app game was made to fullfill study case project PBO class.
             Huge thanks to our college lecturer who made the class fun exciting
@@ -60,25 +59,17 @@ public class About extends Content
             app title is called DDM, resembling us who made this game.
             If you want to contribute to this project, you can go to the following
             https://github.com/devanfer02/GUI-Game
-        """);
+        """
+        );
 
-        textDesc.addFocusListener(new FocusListener() {
-            public void focusLost(FocusEvent event) {
-                textDesc.setEditable(true);
-            }
-
-            public void focusGained(FocusEvent event) {
-                textDesc.setEditable(false);
-            }
-        });
-
-        titlePanel.setBounds(197, 75, 600, 90);
-        mainPanel.setBounds(197, 160, 600, 174);
-        buttonPanel.setBounds(376, 490, 250, 50);
-        imagesPanel.setBounds(150, 350, 640, 150);
-        textDesc.setBounds(100, 140, 600, 250);
-        
+        textDesc.setEditable(false);
         textDesc.setLineWrap(true);
+
+        titlePanel.  setBounds(197, 75, 600, 90);
+        mainPanel.   setBounds(197, 160, 600, 174);
+        buttonPanel. setBounds(376, 490, 250, 50);
+        imagesPanel. setBounds(150, 350, 640, 150);
+        textDesc.    setBounds(100, 140, 600, 250);
 
         SwingUtil.setInvisible(titlePanel);
         SwingUtil.setInvisible(mainPanel);
@@ -91,11 +82,11 @@ public class About extends Content
         SwingUtil.setFont(textDesc, 20, Color.WHITE, Font.PLAIN);
         SwingUtil.setFont(titleLabel, 60, Color.WHITE, Font.BOLD);
 
-        titlePanel.add(titleLabel);
-        mainPanel.add(textDesc);
-        buttonPanel.add(backButton);
-        imagesPanel.add(prodiLabel);
-        imagesPanel.add(facultyLabel);
+        titlePanel.  add(titleLabel);
+        mainPanel.   add(textDesc);
+        buttonPanel. add(backButton);
+        imagesPanel. add(prodiLabel);
+        imagesPanel. add(facultyLabel);
 
         cont.add(titlePanel);
         cont.add(mainPanel);

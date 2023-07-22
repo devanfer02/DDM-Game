@@ -4,6 +4,8 @@ import java.awt.Container;
 
 import javax.swing.JPanel;
 
+import com.mycompany.gui.helpers.console;
+
 public abstract class Content 
 {
     private Content[] contents;
@@ -38,14 +40,19 @@ public abstract class Content
 
     public void addContent(Content content)
     {
-        if (index == SIZE) return;
+        if (index == SIZE) 
+        {
+            console.log("Maximum capacity reached");
+            return;
+        }
+
         contents[index++] = content;
     }
 
     public void insertContent(Content content)
     {
-        this.addContent(content);
-        content.addContent(this);
+        this.    addContent(content);
+        content. addContent(this);
     }
 
     public void setVisible(boolean value)

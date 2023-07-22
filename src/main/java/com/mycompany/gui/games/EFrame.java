@@ -17,13 +17,11 @@ public class EFrame extends JFrame
 
     public EFrame()
     {
-        iconPath = "./src/icons/pti_black.png";
+        iconPath       = "./src/icons/pti_black.png";
         backgroundPath = "./src/images/pic3.png"; 
 
         backgroundImage = new ImageIcon(backgroundPath).getImage();
-        iconImage = new ImageIcon(iconPath).getImage(); 
-
-        setSize(1000,720); 
+        iconImage       = new ImageIcon(iconPath).getImage(); 
 
         JPanel contentPanel = new JPanel() {
             protected void paintComponent(Graphics graphic)
@@ -33,13 +31,13 @@ public class EFrame extends JFrame
             }
         };
 
-        setContentPane(contentPanel);
-        setResizable(false);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
-        setTitle("DDM GUI APP");
-        setIconImage(iconImage);
+        setSize                  (1000,720); 
+        setContentPane           (contentPanel);
+        setResizable             (false);
+        setLocationRelativeTo    (null);
+        setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+        setLayout                (null);
+        setTitle                 ("DDM GUI APP");
+        setIconImage             (iconImage);
     }
-
 }

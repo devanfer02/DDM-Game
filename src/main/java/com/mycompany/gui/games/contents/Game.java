@@ -85,7 +85,7 @@ public class Game extends Content implements Choices
         enemyBot = new Bot(enemy, infoLabels[2]); 
 
         npcPanel.setBounds(200,80,300,300);
-        enemyPanel.setBounds(680, 80, 300, 300);;
+        enemyPanel.setBounds(660, 80, 300, 300);;
         actChoicesPanel.setBounds(20,390,150,250);
         buttonsPanel.setBounds(5,5,56,56);
         infoPanel.setBounds(210, 470, 550, 150); 

@@ -19,24 +19,24 @@ public class SwingUtil
 
     public static void setButtonColor(JButton button)
     {
-        button.setBackground(Color.LIGHT_GRAY);
-        button.setForeground(Color.BLACK); 
-        button.setHorizontalAlignment(SwingConstants.CENTER);
-        button.setVerticalAlignment(SwingConstants.CENTER); 
-        button.setHorizontalTextPosition(SwingConstants.CENTER);
-        button.setVerticalTextPosition(SwingConstants.CENTER);
-        button.setFocusPainted(false);
+        button.setBackground             (Color.LIGHT_GRAY);
+        button.setForeground             (Color.BLACK); 
+        button.setHorizontalAlignment    (SwingConstants.CENTER);
+        button.setVerticalAlignment      (SwingConstants.CENTER); 
+        button.setHorizontalTextPosition (SwingConstants.CENTER);
+        button.setVerticalTextPosition   (SwingConstants.CENTER);
+        button.setFocusPainted           (false);
     }
 
     public static void setFont(JComponent text, int size, Color color, int type)    
     {
-        text.setFont(new Font("Calibri",type, size)); 
-        text.setForeground(color);
+        text.setFont       (new Font("Calibri",type, size)); 
+        text.setForeground (color);
     }
 
     public static ImageIcon resizeImageIcon(ImageIcon icon, int width, int heigth)
     {
-        Image image = icon.getImage();
+        Image image        = icon.getImage();
         Image resizedImage = image.getScaledInstance(width, heigth, Image.SCALE_SMOOTH);
         return new ImageIcon(resizedImage); 
     }

@@ -27,25 +27,25 @@ public class Opening extends Content
         JPanel titlePanel  = new JPanel();
         JPanel buttonPanel = new JPanel(new GridLayout(2,1,0,10));
         
-        titleLabel = new JLabel("DDM GUI APP");
+        titleLabel  = new JLabel("DDM GUI APP");
         
         startButton = new JButton(" CONTINUE ");
         exitButton  = new JButton("EXIT GAME"); 
 
-        titlePanel.setBounds(197, 150, 600, 150);
-        buttonPanel.setBounds(347,430,300,110);
+        titlePanel.  setBounds(197, 150, 600, 150);
+        buttonPanel. setBounds(347,430,300,110);
 
-        SwingUtil.setButtonColor(exitButton);
-        SwingUtil.setButtonColor(startButton);
-        SwingUtil.setFont(exitButton, 22, Color.BLACK, Font.BOLD);
-        SwingUtil.setFont(startButton, 22, Color.BLACK, Font.BOLD);
-        SwingUtil.setFont(titleLabel, 90, Color.WHITE, Font.BOLD);
-        SwingUtil.setInvisible(titlePanel); 
-        SwingUtil.setInvisible(buttonPanel);
+        SwingUtil.setButtonColor (exitButton);
+        SwingUtil.setButtonColor (startButton);
+        SwingUtil.setFont        (exitButton, 22, Color.BLACK, Font.BOLD);
+        SwingUtil.setFont        (startButton, 22, Color.BLACK, Font.BOLD);
+        SwingUtil.setFont        (titleLabel, 90, Color.WHITE, Font.BOLD);
+        SwingUtil.setInvisible   (titlePanel); 
+        SwingUtil.setInvisible   (buttonPanel);
         
-        titlePanel.add(titleLabel);
-        buttonPanel.add(startButton);
-        buttonPanel.add(exitButton); 
+        titlePanel.  add(titleLabel);
+        buttonPanel. add(startButton);
+        buttonPanel. add(exitButton); 
 
         cont.add(titlePanel);
         cont.add(buttonPanel);    
@@ -55,7 +55,7 @@ public class Opening extends Content
 
     public void instantiateHandler()
     {   
-        startButton.addActionListener(new NodeController(this));
-        exitButton.addActionListener(new ExitController()); 
+        startButton.addActionListener (new NodeController(this));
+        exitButton.addActionListener  (new ExitController()); 
     }
 }

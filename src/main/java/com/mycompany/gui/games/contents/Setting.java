@@ -34,9 +34,9 @@ public class Setting extends Content implements Choices
         super(size);
         cont = Engine.frame.getContentPane();
 
-        JPanel titlePanel = new JPanel(new GridLayout(3, 1));
+        JPanel titlePanel  = new JPanel(new GridLayout(3, 1));
         JPanel buttonPanel = new JPanel(new GridLayout(3, 1, 0, 10));
-        JPanel songPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+        JPanel songPanel   = new JPanel(new GridLayout(2, 1, 10, 10));
         
         titleLabel  = new JLabel(" SETTINGS");
         songLabel   = new JLabel("Current song : " + Music.getCurrentSong());
@@ -50,9 +50,9 @@ public class Setting extends Content implements Choices
         volumeUpButton   = new JButton("+");
         gameButton       = new JButton("CONTINUE GAME");
 
-        titlePanel.setBounds(365, 90, 400, 190);
-        songPanel.setBounds(348, 275, 302, 110);
-        buttonPanel.setBounds(348, 420, 302, 170);
+        titlePanel.  setBounds(365, 90, 400, 190);
+        songPanel.   setBounds(348, 275, 302, 110);
+        buttonPanel. setBounds(348, 420, 302, 170);
 
         SwingUtil.setFont(titleLabel, 60, Color.WHITE, Font.BOLD);
         SwingUtil.setFont(songLabel, 25, Color.WHITE, Font.BOLD);
@@ -79,13 +79,13 @@ public class Setting extends Content implements Choices
         SwingUtil.setFont(backButton, 22, Color.BLACK, Font.BOLD);
         SwingUtil.setFont(gameButton, 22, Color.BLACK, Font.BOLD);
 
-        songPanel.add(volumeDownButton);
-        songPanel.add(volumeUpButton);
-        songPanel.add(prevButton);
-        songPanel.add(nextButton);
-        buttonPanel.add(turnButton);
-        buttonPanel.add(backButton);
-        buttonPanel.add(gameButton);
+        songPanel.   add(volumeDownButton);
+        songPanel.   add(volumeUpButton);
+        songPanel.   add(prevButton);
+        songPanel.   add(nextButton);
+        buttonPanel. add(turnButton);
+        buttonPanel. add(backButton);
+        buttonPanel. add(gameButton);
 
         titlePanel.add(titleLabel);
         titlePanel.add(songLabel);
@@ -105,13 +105,14 @@ public class Setting extends Content implements Choices
     public void instantiateHandler() 
     {
         Controller settingHandler = new ChoiceController(this);
-        nextButton.addActionListener(settingHandler);
-        prevButton.addActionListener(settingHandler);
-        turnButton.addActionListener(settingHandler);
-        volumeDownButton.addActionListener(settingHandler);
-        volumeUpButton.addActionListener(settingHandler);
-        backButton.addActionListener(new NodeController(this));
-        gameButton.addActionListener(new NodeController(this, 1));
+
+        nextButton.       addActionListener(settingHandler);
+        prevButton.       addActionListener(settingHandler);
+        turnButton.       addActionListener(settingHandler);
+        volumeDownButton. addActionListener(settingHandler);
+        volumeUpButton.   addActionListener(settingHandler);
+        backButton.       addActionListener(new NodeController(this));
+        gameButton.       addActionListener(new NodeController(this, 1));
     }
 
     public void updateButtons()
@@ -127,28 +128,34 @@ public class Setting extends Content implements Choices
     {
         switch (action) 
         {
-            case "+" -> {
+            case "+" -> 
+            {
                 Music.setVolume(Music.getVolume() + 0.1f);
                 volumeLabel.setText("Volume song : " + String.format("%.0f%%", (Music.getVolume() * 100)));
             }
-            case "-" -> {
+            case "-" -> 
+            {
                 Music.setVolume(Music.getVolume() - 0.1f);
                 volumeLabel.setText("Volume song : " + String.format("%.0f%%", (Music.getVolume() * 100)));
             }
-            case "PREV" -> {
+            case "PREV" -> 
+            {
                 Music.playPrev();
                 songLabel.setText("Current song : " + Music.getCurrentSong());
             }
-            case "NEXT" -> {
+            case "NEXT" -> 
+            {
                 Music.playNext();
                 songLabel.setText("Current song : " + Music.getCurrentSong());
             }
-            case "SOUND : ON" -> {
+            case "SOUND : ON" -> 
+            {
                 Music.stop = true;
                 Music.stop();
                 turnButton.setText("SOUND : OFF");
             }
-            case "SOUND : OFF" -> {
+            case "SOUND : OFF" -> 
+            {
                 Music.stop = false;
                 Music.play();
                 turnButton.setText("SOUND : ON");

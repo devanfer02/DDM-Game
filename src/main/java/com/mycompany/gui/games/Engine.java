@@ -21,43 +21,42 @@ public class Engine implements GameSetting
         frame = new EFrame();
         level = Difficulty.EASY;
 
-        // all instantiations
+        // all content instantiations
         contents = new ArrayList<>();
-        contents.add(new Opening(1));
-        contents.add(new Menu(3));
-        contents.add(new Setting(2));
-        contents.add(new About(1));
-        contents.add(new Setup(2));
-        contents.add(new Game(2));
-        contents.add(new Result(2));
+        contents.add(new Opening (1));
+        contents.add(new Menu    (3));
+        contents.add(new Setting (2));
+        contents.add(new About   (1));
+        contents.add(new Setup   (2));
+        contents.add(new Game    (2));
+        contents.add(new Result  (2));
 
         // setting up next and before content
-        contents.get(0).addContent(contents.get(1)); 
-        contents.get(1).insertContent(contents.get(2)); 
-        contents.get(1).insertContent(contents.get(3)); 
-        contents.get(1).insertContent(contents.get(4)); 
-        contents.get(4).addContent(contents.get(5));
-        contents.get(5).insertContent(contents.get(2));
-        contents.get(5).insertContent(contents.get(6));
-        contents.get(6).addContent(contents.get(1));
+        contents.get(0).addContent    (contents.get(1)); 
+        contents.get(1).insertContent (contents.get(2)); 
+        contents.get(1).insertContent (contents.get(3)); 
+        contents.get(1).insertContent (contents.get(4)); 
+        contents.get(4).addContent    (contents.get(5));
+        contents.get(5).insertContent (contents.get(2));
+        contents.get(5).insertContent (contents.get(6));
+        contents.get(6).addContent    (contents.get(1));
 
         // doing instantiate action event controller
         for(Content content : contents)
         {
-            if(content == null) break;
             content.instantiateHandler();
         }     
-
-        Music.update();
-        Music.play();   
         frame.setVisible(true);
+
+        Music.update ();
+        Music.play   ();   
     }
 
     public static void setContent(Container content)
     {   
         frame.setContentPane(content);
-        frame.revalidate();
-        frame.repaint();
+        frame.revalidate    ();
+        frame.repaint       ();
     }
 
     public static boolean gameIsRunning()

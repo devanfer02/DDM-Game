@@ -60,7 +60,7 @@ public class Setup extends Content implements Choices
         selectLabel = new JLabel("<HTML></HTML>");
         informLabel = new JLabel("<HTML></HTML>");
 
-        formField = new JTextField(12);
+        formField   = new JTextField(12);
 
         easyButton    = new JButton("EASY");
         normalButton  = new JButton("NORMAL");
@@ -69,7 +69,7 @@ public class Setup extends Content implements Choices
         startButton   = new JButton("START GAME");
         backButton    = new JButton("BACK MENU");
 
-        message1 = new String[5]; index = 0;
+        message1    = new String[5]; index = 0;
         message1[0] = "By what name do you bear ?";
         message1[1] = "Speak again, i can't hear you";
         message1[2] = "Did i hear something ?";
@@ -84,20 +84,21 @@ public class Setup extends Content implements Choices
         // limiting character input to 15 characters only
         AbstractDocument document = (AbstractDocument) formField.getDocument();
         document.setDocumentFilter(new LengthFilter(15));
-        formField.setToolTipText("Press enter");
-        ToolTipManager.sharedInstance().setInitialDelay(0);
+
         // making sure user knows to press enter
+        ToolTipManager.sharedInstance().setInitialDelay(0);
+        formField.setToolTipText("Press enter");
         JToolTip toolTip = formField.createToolTip();
         toolTip.setTipText(formField.getToolTipText());
         toolTip.setVisible(true);
 
-        titlePanel.setBounds(197, 75, 600, 90);
-        informPanel.setBounds(380,150,500,90);
-        formPanel.setBounds(210,220,600,100);
-        configPanel.setBounds(210,370,600,54);
-        buttonsPanel.setBounds(380,470,260,104);
-        infoPanel.setBounds(200, 310,600,200);
-        formField.setBounds(210,280,440,100); 
+        titlePanel.   setBounds(197, 75, 600, 90);
+        informPanel.  setBounds(380,150,500,90);
+        formPanel.    setBounds(210,220,600,100);
+        configPanel.  setBounds(210,370,600,54);
+        buttonsPanel. setBounds(380,470,260,104);
+        infoPanel.    setBounds(200, 310,600,200);
+        formField.    setBounds(210,280,440,100); 
 
         SwingUtil.setInvisible(titlePanel);
         SwingUtil.setInvisible(informPanel);
@@ -125,16 +126,16 @@ public class Setup extends Content implements Choices
         SwingUtil.setButtonColor(startButton   );
         SwingUtil.setButtonColor(backButton    );
 
-        titlePanel.add(titleLabel); 
-        informPanel.add(selectLabel);
-        infoPanel.add(informLabel);
-        formPanel.add(formField);
-        configPanel.add(easyButton);
-        configPanel.add(normalButton);
-        configPanel.add(hardButton);
-        configPanel.add(extremeButton); 
-        buttonsPanel.add(startButton);
-        buttonsPanel.add(backButton);
+        titlePanel.   add(titleLabel); 
+        informPanel.  add(selectLabel);
+        infoPanel.    add(informLabel);
+        formPanel.    add(formField);
+        configPanel.  add(easyButton);
+        configPanel.  add(normalButton);
+        configPanel.  add(hardButton);
+        configPanel.  add(extremeButton); 
+        buttonsPanel. add(startButton);
+        buttonsPanel. add(backButton);
 
         cont.add(titlePanel);
         cont.add(informPanel);
@@ -176,13 +177,13 @@ public class Setup extends Content implements Choices
         // ActionClasses
         Controller selectHandler = new ChoiceController(this);
 
-        easyButton.addActionListener(selectHandler);
-        normalButton.addActionListener(selectHandler);
-        hardButton.addActionListener(selectHandler);
-        extremeButton.addActionListener(selectHandler);
-        startButton.addActionListener(new NodeController(this,1));
-        backButton.addActionListener(new NodeController(this,0));
-        formField.addKeyListener(new KeyAdapter() {
+        easyButton.    addActionListener(selectHandler);
+        normalButton.  addActionListener(selectHandler);
+        hardButton.    addActionListener(selectHandler);
+        extremeButton. addActionListener(selectHandler);
+        startButton.   addActionListener(new NodeController(this,1));
+        backButton.    addActionListener(new NodeController(this,0));
+        formField.     addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent event)
             {
                 int code = event.getKeyCode();
@@ -196,18 +197,18 @@ public class Setup extends Content implements Choices
                     return;
                 }
                 panels[1].setVisible(true);
-                animate2.startAnimate();
                 panels[3].setVisible(true);
+                animate2.startAnimate();
             }
         });
     }
 
     public void repaintAll()
     {
-        easyButton.setBackground(Color.LIGHT_GRAY);
-        normalButton.setBackground(Color.LIGHT_GRAY);
-        hardButton.setBackground(Color.LIGHT_GRAY);
-        extremeButton.setBackground(Color.LIGHT_GRAY);
+        easyButton.    setBackground(Color.LIGHT_GRAY);
+        normalButton.  setBackground(Color.LIGHT_GRAY);
+        hardButton.    setBackground(Color.LIGHT_GRAY);
+        extremeButton. setBackground(Color.LIGHT_GRAY);
     }
 
     public void actionHandling(String action)
@@ -215,19 +216,23 @@ public class Setup extends Content implements Choices
         repaintAll();
         switch (action)
         {
-            case "EASY" -> {
+            case "EASY" -> 
+            {
                 Engine.level = Difficulty.EASY;   
                 easyButton.setBackground(Color.GREEN);
             }
-            case "NORMAL" -> {
+            case "NORMAL" -> 
+            {
                 Engine.level = Difficulty.NORMAL;
                 normalButton.setBackground(Color.YELLOW);
             }
-            case "HARD" -> {
+            case "HARD" -> 
+            {
                 Engine.level = Difficulty.HARD;
                 hardButton.setBackground(Color.ORANGE);
             }
-            case "EXTREME" -> {
+            case "EXTREME" -> 
+            {
                 Engine.level = Difficulty.EXTREME;
                 extremeButton.setBackground(Color.RED);
             }

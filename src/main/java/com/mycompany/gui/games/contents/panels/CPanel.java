@@ -25,14 +25,18 @@ public class CPanel extends JPanel
         this.character = character;
 
         if (character instanceof Hero)
+        {
             baseAtk = Hero.getBaseAtk();
+        }
         else 
+        {
             baseAtk = Enemy.getBaseAtk();
+        }
 
         labels      = new JLabel[4];
         labels[0]   = new JLabel(character.getName());
         labels[1]   = new JLabel(String.valueOf(character.getHp()));
-        labels[2]   = new JLabel(String.valueOf(character.getWeapon().getAtk()));
+        labels[2]   = new JLabel(String.valueOf(character.getWeapon().getAtk() + baseAtk));
         labels[3]   = new JLabel(String.valueOf(character.getDef()));
     
         for (JLabel label : labels)
@@ -55,6 +59,8 @@ public class CPanel extends JPanel
     public void setFontSize(int size)
     {
         for(JLabel label : labels)
+        {
             SwingUtil.setFont(label,22,Color.WHITE, Font.BOLD);
+        }
     }
 }

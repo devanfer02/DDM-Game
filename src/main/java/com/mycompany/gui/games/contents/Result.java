@@ -24,16 +24,16 @@ public class Result extends Content
         super(size);
         cont = Engine.frame.getContentPane();
 
-        JPanel titlePanel = new JPanel();
+        JPanel titlePanel   = new JPanel();
         JPanel buttonsPanel = new JPanel(new GridLayout(2,1,0,10));
 
         resultLabel = new JLabel("");
 
-        playButton = new JButton("PLAY AGAIN"); 
-        menuButton = new JButton("BACK MENU"); 
+        playButton  = new JButton("PLAY AGAIN"); 
+        menuButton  = new JButton("BACK MENU"); 
 
-        titlePanel.setBounds(197, 150, 600, 150);
-        buttonsPanel.setBounds(347,430,300,110);
+        titlePanel.   setBounds(197, 150, 600, 150);
+        buttonsPanel. setBounds(347,430,300,110);
 
         SwingUtil.setButtonColor(playButton);
         SwingUtil.setButtonColor(menuButton);
@@ -45,9 +45,9 @@ public class Result extends Content
         SwingUtil.setInvisible(titlePanel);
         SwingUtil.setInvisible(buttonsPanel);
 
-        titlePanel.add(resultLabel);
-        buttonsPanel.add(playButton);
-        buttonsPanel.add(menuButton); 
+        titlePanel.   add(resultLabel);
+        buttonsPanel. add(playButton);
+        buttonsPanel. add(menuButton); 
 
         cont.add(titlePanel);
         cont.add(buttonsPanel);

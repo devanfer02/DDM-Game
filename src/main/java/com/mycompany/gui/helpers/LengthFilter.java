@@ -19,7 +19,7 @@ public class LengthFilter extends DocumentFilter
             try {
                 super.insertString(filterBypass, offset, text, attrs);
             } catch (Exception error) {
-                error.printStackTrace();
+                console.log(error.getMessage());
             }   
         }
     }
@@ -31,7 +31,7 @@ public class LengthFilter extends DocumentFilter
             try {
                 super.replace(filterBypass, offset, length, text, attrs);
             } catch (Exception error) {
-                error.printStackTrace();
+                console.log(error.getMessage());
             }
             
         }

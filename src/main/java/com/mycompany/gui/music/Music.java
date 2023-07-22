@@ -16,10 +16,14 @@ public class Music
 
     private static String[] backsoundSongs;
     private static String[] battleSongs;
+
     private static String titleCurrent;
+
     private static int listSize;
     private static int index;
+
     private static float volume;
+    
     public static boolean stop;
 
     public static void init() 
@@ -37,19 +41,21 @@ public class Music
 
     private static String[] loadSongs(String path) 
     {
-        File dir = new File(path); int size = 0;
+        File dir = new File(path);  
         String[] arrays = dir.list();
+
         if(arrays == null) 
         {
             console.log("Files not loaded");
             console.log("Make sure the GUI-GAME is root directory");
             return arrays;   
         }
-        size = arrays.length;
-        for(int i = 0; i < size; i++) 
+        
+        for(int i = 0; i < arrays.length ; i++) 
         {
             arrays[i] = "" + path + "/" + arrays[i];
         }
+
         return arrays;
     }
 
@@ -60,6 +66,7 @@ public class Music
             console.log("Music not loaded");
             return;
         }
+
         if(!stop) 
         {
             current.start();
@@ -86,6 +93,7 @@ public class Music
             console.log("Music not loaded");
             return;
         }
+
         titleCurrent = backsoundSongs[index];
         current = openAudio(backsoundSongs[index]);
     }
@@ -134,6 +142,8 @@ public class Music
 
     public static void setVolume(float volume)
     {
+        String strVol = String.format("%.2f", volume);
+        volume = Float.parseFloat(strVol);
         if(volume < 0f || volume > 1f)
             return;
 
@@ -194,6 +204,7 @@ public class Music
         AudioInputStream audioStream;
         File file;
         Clip clip = null;
+
         try { 
             file = new File(pathSong);
             audioStream = AudioSystem.getAudioInputStream(file);
@@ -202,6 +213,7 @@ public class Music
         } catch (Exception e) {
             console.log("Error : " + e.getMessage()); 
         }
+        
         return clip;
     }
 }

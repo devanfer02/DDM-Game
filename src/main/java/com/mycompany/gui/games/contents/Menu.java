@@ -26,18 +26,18 @@ public class Menu extends Content
         super(size);
         cont = Engine.frame.getContentPane();
 
-        JPanel titlePanel = new JPanel();
+        JPanel titlePanel  = new JPanel();
         JPanel buttonPanel = new JPanel(new GridLayout(4, 1, 0, 10));
         
-        titleLabel = new JLabel("GAME GUI APP");
+        titleLabel  = new JLabel("GAME GUI APP");
         
-        startButton = new JButton("START GAME");
-        aboutButton = new JButton("ABOUT GAME");
+        startButton   = new JButton("START GAME");
+        aboutButton   = new JButton("ABOUT GAME");
         settingButton = new JButton(" SETTINGS ");
-        exitButton = new JButton(" EXIT APP ");
+        exitButton    = new JButton(" EXIT APP ");
         
-        buttonPanel.setBounds(347, 240, 302, 250);
-        titlePanel.setBounds(197, 75, 600, 100);
+        buttonPanel.setBounds (347, 240, 302, 250);
+        titlePanel. setBounds (197, 75, 600, 100);
 
         SwingUtil.setButtonColor(startButton);
         SwingUtil.setButtonColor(aboutButton);
@@ -69,9 +69,9 @@ public class Menu extends Content
 
     public void instantiateHandler() 
     {
-        startButton.addActionListener(new NodeController(this, 2));
-        aboutButton.addActionListener(new NodeController(this, 1));
-        settingButton.addActionListener(new NodeController(this,0));
-        exitButton.addActionListener(new ExitController());
+        startButton.addActionListener   (new NodeController(this, 2));
+        aboutButton.addActionListener   (new NodeController(this, 1));
+        settingButton.addActionListener (new NodeController(this,0));
+        exitButton.addActionListener    (new ExitController());
     }
 }
